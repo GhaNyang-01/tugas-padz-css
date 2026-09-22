@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer</title>
+
+    <style>
+        /* =========================
+           RESET / DASAR
+        ========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            color: #1f2937;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            background-color: #1e3a8a;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            color: #facc15;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           BERANDA
+        ========================== */
+        #beranda {
+            min-height: 560px;
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            padding: 80px 8%;
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-text .small-title {
+            color: #f59e0b;
+            font-weight: bold;
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 13px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background-color: #2563eb;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            width: 430px;
+            height: 330px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* =========================
+           SECTION UMUM
+        ========================== */
+        section {
+            padding: 70px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 70px;
+            height: 4px;
+            margin: 10px auto;
+            background-color: #f59e0b;
+            border-radius: 5px;
+        }
+
+        /* =========================
+           PROFESI - 8 CARD
+        ========================== */
+        #profesi {
+            background-color: white;
+        }
+
+        .profession-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .profession-card {
+            background-color: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .profession-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+            border-color: #93c5fd;
+        }
+
+        .profession-card .number {
+            display: inline-flex;
+            width: 42px;
+            height: 42px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #1e3a8a;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .profession-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .profession-card p {
+            line-height: 1.6;
+            color: #64748b;
+        }
+
+        /* =========================
+           SKILL - 6 CARD
+        ========================== */
+        #skill {
+            background-color: #f4f7fb;
+        }
+
+        .skill-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .skill-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .skill-card .skill-content {
+            padding: 22px;
+        }
+
+        .skill-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .skill-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           TOOLS & TECHNOLOGY - 12 CARD
+        ========================== */
+        #tools {
+            background-color: white;
+        }
+
+        .tools-cards {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 22px;
+        }
+
+        .tool-card {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .tool-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .tool-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 8px;
+            background-color: white;
+            display: block;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+        @media (max-width: 1000px) {
+            .profession-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tools-cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            #beranda {
+                gap: 30px;
+            }
+
+            .hero-image {
+                width: 380px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 8%;
+                width: 210px;
+                padding: 15px;
+                background-color: #1e3a8a;
+                border-radius: 8px;
+                flex-direction: column;
+                gap: 0;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            .menu.show {
+                display: flex;
+            }
+
+            .menu li {
+                padding: 12px 0;
+            }
+
+            #beranda {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 37px;
+            }
+
+            .hero-image {
+                width: 100%;
+                max-width: 500px;
+                height: 300px;
+            }
+
+            .profession-cards,
+            .skill-cards,
+            .tools-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+    <nav class="navbar">
+        <div class="logo">Game Developer</div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">
+            ☰
+        </button>
+
+        <ul class="menu" id="menu">
+            <li><a href="#beranda" class="active">Beranda</a></li>
+            <li><a href="#profesi">Profesi</a></li>
+            <li><a href="#skill">Skill</a></li>
+            <li><a href="#tools">Tools & Technology</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <!-- =========================
+             BERANDA
+        ========================== -->
+        <section id="beranda">
+            <div class="hero-text">
+                <div class="small-title">PROFIL KARIER DIGITAL</div>
+
+                <h1>Game Developer</h1>
+
+                <p>
+                    Game Developer adalah seseorang yang mengembangkan sebuah
+                    permainan digital, mulai dari konsep, pemrograman, desain,
+                    gameplay, hingga proses pengujian agar game dapat dimainkan
+                    dengan baik.
+                </p>
+
+                <a href="#profesi" class="hero-button">Pelajari Lebih Lanjut</a>
+            </div>
+
+            <div class="hero-image">
+                <img
+                    src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80"
+                    alt="Perangkat dan suasana pengembangan game">
+            </div>
+        </section>
+
+        <!-- =========================
+             PROFESI
+        ========================== -->
+        <section id="profesi">
+            <h2 class="section-title">Profesi dalam Game Development</h2>
+
+            <div class="profession-cards">
+
+                <div class="profession-card">
+                    <div class="number">1</div>
+                    <h3>Game Programmer</h3>
+                    <p>Membuat sistem dan mekanisme game menggunakan bahasa pemrograman.</p>
+                </div>
+
+                <div class="profession-card">
+                    <div class="number">2</div>
+                    <h3>Game Designer</h3>
+                    <p>Merancang aturan, gameplay, level, tantangan, dan pengalaman bermain.</p>
+                </div>
+
+                <div class="profession-card">
+                    <div class="number">3</div>
+                    <h3>Game Artist</h3>
+                    <p>Membuat aset visual seperti karakter, lingkungan, objek, dan ilustrasi.</p>
+                </div>
+
+                <div class="profession-card">
+                    <div class="number">4</div>
+                    <h3>3D Artist</h3>
+                    <p>Membuat model tiga dimensi untuk karakter, benda, lingkungan, dan aset game.</p>
+                </div>
+
+                <div class="profession-card">
+                    <div class="number">5</div>
+                    <h3>Animator</h3>
+                    <p>Membuat gerakan karakter, objek, dan berbagai animasi di dalam game.</p>
+                </div>
+
+                <div class="profession-card">
+                    <div class="number">6</div>
+                    <h3>Game Tester</h3>
+                    <p>Menguji game untuk menemukan bug, masalah gameplay, dan kesalahan lainnya.</p>
+                </div>
+
+                <div class="profession-card">
+                    <div class="number">7</div>
+                    <h3>Sound Designer</h3>
+                    <p>Membuat dan mengatur efek suara, musik, serta audio yang digunakan dalam game.</p>
+                </div>
+
+                <div class="profession-card">
+                    <div class="number">8</div>
+                    <h3>Producer</h3>
+                    <p>Mengelola proses pengembangan game, tim, jadwal, dan berbagai kebutuhan proyek.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =========================
+             SKILL
+        ========================== -->
+        <section id="skill">
+            <h2 class="section-title">Skill yang Dibutuhkan</h2>
+
+            <div class="skill-cards">
+
+                <div class="skill-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=700&q=80"
+                        alt="Pemrograman">
+                    <div class="skill-content">
+                        <h3>Pemrograman</h3>
+                        <p>Mampu memahami logika dan menulis kode untuk membuat fitur game.</p>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=700&q=80"
+                        alt="Desain">
+                    <div class="skill-content">
+                        <h3>Desain Kreatif</h3>
+                        <p>Mampu menghasilkan konsep visual dan desain yang sesuai dengan tema game.</p>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=700&q=80"
+                        alt="Game development">
+                    <div class="skill-content">
+                        <h3>Game Logic</h3>
+                        <p>Memahami bagaimana mekanisme permainan bekerja dan saling terhubung.</p>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=700&q=80"
+                        alt="Kerja sama tim">
+                    <div class="skill-content">
+                        <h3>Teamwork</h3>
+                        <p>Mampu bekerja sama dengan programmer, artist, designer, dan anggota tim lainnya.</p>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=700&q=80"
+                        alt="Problem solving">
+                    <div class="skill-content">
+                        <h3>Problem Solving</h3>
+                        <p>Mampu mencari penyebab masalah dan menemukan solusi ketika terjadi bug.</p>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=700&q=80"
+                        alt="Belajar dan berkembang">
+                    <div class="skill-content">
+                        <h3>Learning</h3>
+                        <p>Terus mempelajari teknologi, engine, bahasa pemrograman, dan tren game terbaru.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =========================
+             TOOLS & TECHNOLOGY
+        ========================== -->
+        <section id="tools">
+            <h2 class="section-title">Tools & Technology</h2>
+
+            <div class="tools-cards">
+
+                <div class="tool-card">
+                    <h3>Unity</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Unity_Technologies_logo.svg" alt="Unity">
+                </div>
+
+                <div class="tool-card">
+                    <h3>Unreal Engine</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unrealengine/unrealengine-original.svg"
+                         alt="Unreal Engine"
+                         onerror="this.src='https://cdn.simpleicons.org/unrealengine/1e3a8a';">
+                </div>
+
+                <div class="tool-card">
+                    <h3>Godot</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Godot_icon.svg" alt="Godot">
+                </div>
+
+                <div class="tool-card">
+                    <h3>Blender</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg"
+                         alt="Blender"
+                         onerror="this.src='https://cdn.simpleicons.org/blender/1e3a8a';">
+                </div>
+
+                <div class="tool-card">
+                    <h3>C#</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C Sharp">
+                </div>
+
+                <div class="tool-card">
+                    <h3>C++</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C Plus Plus">
+                </div>
+
+                <div class="tool-card">
+                    <h3>Git</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                </div>
+
+                <div class="tool-card">
+                    <h3>GitHub</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+                </div>
+
+                <div class="tool-card">
+                    <h3>Visual Studio</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" alt="Visual Studio">
+                </div>
+
+                <div class="tool-card">
+                    <h3>VS Code</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="Visual Studio Code">
+                </div>
+
+                <div class="tool-card">
+                    <h3>JavaScript</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                </div>
+
+                <div class="tool-card">
+                    <h3>Figma</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Game Developer. Belajar, Berkarya, dan Berkembang Bersama Teknologi.</p>
+    </footer>
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+    <script>
+        const menuToggle = document.querySelector("#menuToggle");
+        const menu = document.querySelector("#menu");
+        const menuLinks = document.querySelectorAll(".menu a");
+
+        // Membuka / menutup menu pada perangkat mobile
+        menuToggle.addEventListener("click", function () {
+            menu.classList.toggle("show");
+        });
+
+        // Mengatur menu aktif ketika diklik
+        menuLinks.forEach(function (link) {
+            link.addEventListener("click", function () {
+
+                menuLinks.forEach(function (item) {
+                    item.classList.remove("active");
+                });
+
+                link.classList.add("active");
+                menu.classList.remove("show");
+            });
+        });
+
+        // Mengubah menu aktif berdasarkan posisi section
+        window.addEventListener("scroll", function () {
+            const sections = document.querySelectorAll("main section");
+            let currentSection = "";
+
+            sections.forEach(function (section) {
+                const sectionTop = section.offsetTop - 120;
+
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute("id");
+                }
+            });
+
+            menuLinks.forEach(function (link) {
+                link.classList.remove("active");
+
+                if (link.getAttribute("href") === "#" + currentSection) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
